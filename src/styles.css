@@ -35,3 +35,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 #toast.on{opacity:1}
 @media (max-width:560px){.row{grid-template-columns:1fr}.act{justify-content:flex-start}}
 @media (prefers-reduced-motion:reduce){#toast{transition:none}}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--stamp);color:var(--stamp);border-radius:4px;padding:1px 8px;vertical-align:middle}
+.who{display:flex;align-items:center;gap:10px;font-size:.9rem;flex-wrap:wrap}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0 20px}
+h2.sec{font:700 1.4rem "Newsreader",Georgia,serif;margin:20px 0 4px}
