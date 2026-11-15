@@ -45,7 +45,12 @@ function Shell() {
           </>
         )}
       </header>
-      <main>{user ? <active.Component /> : <LoginView />}</main>
+      <main>
+        {/* The key changes with the view, so React remounts this div and the CSS entrance animation replays. */}
+        <div className="view" key={user ? active.id : "login"}>
+          {user ? <active.Component /> : <LoginView />}
+        </div>
+      </main>
       <Toast message={toast} onDone={clearToast} />
     </>
   );
