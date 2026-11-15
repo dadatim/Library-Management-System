@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AuthProvider, ROLE_LABELS, useAuth } from "./auth.jsx";
 import { LibraryProvider, useLibrary } from "./library.jsx";
-import { CatalogView, LoansView, LoginView, ManageView, MembersView, Toast } from "./components.jsx";
+import { CatalogView, LandingView, LoansView, LoginView, ManageView, MembersView, Toast } from "./components.jsx";
 
 // Each view declares the permission it needs; the nav and the router both read this table.
 const VIEWS = [
@@ -26,6 +26,7 @@ function Shell() {
 
   const allowed = VIEWS.filter((v) => can(v.perm));
   const active = allowed.find((v) => v.id === hash) ?? allowed[0]; // blocked or unknown routes fall back
+  const guestView = hash === "signin" ? "signin" : "landing"; // signed-out visitors: landing page, then role picker
 
   return (
     <>
@@ -47,8 +48,8 @@ function Shell() {
       </header>
       <main>
         {/* The key changes with the view, so React remounts this div and the CSS entrance animation replays. */}
-        <div className="view" key={user ? active.id : "login"}>
-          {user ? <active.Component /> : <LoginView />}
+        <div className="view" key={user ? active.id : guestView}>
+          {user ? <active.Component /> : guestView === "signin" ? <LoginView /> : <LandingView />}
         </div>
       </main>
       <Toast message={toast} onDone={clearToast} />

@@ -11,10 +11,40 @@ export function Toast({ message, onDone }) {
   return <div id="toast" className={message ? "on" : ""} role="status" aria-live="polite">{message}</div>;
 }
 
+const FEATURES = [
+  { title: "A catalog you can search", text: "Find titles by author or subject and see at a glance which copies are on the shelf." },
+  { title: "Loans without the paperwork", text: "Check out, renew and return in a click. Due dates and fines are worked out for you." },
+  { title: "The right view for everyone", text: "Members, librarians and admins each see only the tools they need, so the desk stays simple." },
+];
+
+export function LandingView() {
+  return (
+    <>
+      <section className="hero">
+        <span className="badge">Library management</span>
+        <h2>Make Managing Your Libraries Easier</h2>
+        <p className="lead">
+          Circulation Desk brings your catalog, loans, members and fines into one place, so staff spend less time on admin and more time with readers.
+        </p>
+        <a className="btn" href="#signin">Sign in</a>
+      </section>
+      <section className="features" aria-label="Features">
+        {FEATURES.map((f) => (
+          <div className="feature" key={f.title}>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+          </div>
+        ))}
+      </section>
+    </>
+  );
+}
+
 export function LoginView() {
   const { login } = useAuth();
   return (
     <>
+      <a className="back" href="#">← Back to home</a>
       <h2 className="sec">Sign in</h2>
       <p className="m">Demo accounts. Pick a role to see how the interface changes.</p>
       {ACCOUNTS.map((a) => (
